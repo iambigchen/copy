@@ -6,7 +6,6 @@ let val = ''
 
 const app = http.createServer((req, response) => {
     const myUrl = url.parse(req.url)
-    console.log(`-----123----`, myUrl)
     if (myUrl.pathname === '/') {
         fs.readFile('index.html', (error, data) => {
             if (error) {
