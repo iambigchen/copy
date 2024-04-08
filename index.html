@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <textarea name="val" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <button class="sub">提交</button>
+        <button class="refresh">刷新</button>
+        <button onclick="document.querySelector('textarea').select();document.execCommand('copy')">复制</button>
+    </div>
+    <script>
+        document.querySelector('.sub').onclick = submit
+        function submit () {
+            fetch('/copy?val=' + document.querySelector('textarea').value, {
+                method: 'GET'
+            })
+        }
+
+        document.querySelector('.refresh').onclick = function () {
+            getData()
+        }
+
+        getData()
+
+        function getData () {
+            fetch('/get', {
+                method: 'GET'
+            }).then(function (res) {
+                return res.json()
+            }).then(function (val) {
+                document.querySelector('textarea').value = val
+            })
+        }
+    </script>
+</body>
+</html>
